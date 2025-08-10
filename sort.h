@@ -17,5 +17,6 @@ void print_list(const listint_t *list);
 
 /* Sorting algorithms */
 void bubble_sort(int *array, size_t size);
+void selection_sort(int *array, size_t size);
 
 #endif /* SORT_H */
