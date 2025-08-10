@@ -1,26 +1,29 @@
 #include "sort.h"
 
 /**
- * swap - Swaps two elements in an array
- * @a: Pointer to first element
- * @b: Pointer to second element
+ * swap_ints - swaps two integers in an array
+ * @a: first integer pointer
+ * @b: second integer pointer
  */
-void swap(int *a, int *b)
+void swap_ints(int *a, int *b)
 {
-	int temp;
+	int tmp;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	if (*a != *b)
+	{
+		tmp = *a;
+		*a = *b;
+		*b = tmp;
+	}
 }
 
 /**
- * lomuto_partition - Partitions the array using Lomuto scheme
- * @array: Array to partition
- * @low: Starting index
- * @high: Ending index (pivot)
- * @size: Size of the array
- * Return: The partition index
+ * lomuto_partition - partitions the array using Lomuto scheme
+ * @array: array to partition
+ * @low: starting index
+ * @high: ending index (pivot)
+ * @size: size of the array
+ * Return: pivot index
  */
 int lomuto_partition(int *array, int low, int high, size_t size)
 {
@@ -35,7 +38,7 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 		{
 			if (i != j)
 			{
-				swap(&array[i], &array[j]);
+				swap_ints(&array[i], &array[j]);
 				print_array(array, size);
 			}
 			i++;
@@ -43,18 +46,18 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 	}
 	if (i != high)
 	{
-		swap(&array[i], &array[high]);
+		swap_ints(&array[i], &array[high]);
 		print_array(array, size);
 	}
 	return (i);
 }
 
 /**
- * quick_sort_recursive - Recursively sorts subarrays
- * @array: Array to sort
- * @low: Starting index
- * @high: Ending index
- * @size: Size of the array
+ * quick_sort_recursive - recursive quicksort implementation
+ * @array: array to sort
+ * @low: starting index
+ * @high: ending index
+ * @size: size of the array
  */
 void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
@@ -69,15 +72,14 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 }
 
 /**
- * quick_sort - Sorts an array of integers in ascending order using Quick sort
- * @array: Array to sort
- * @size: Size of the array
+ * quick_sort - sorts an array of integers using quicksort algorithm
+ * @array: array to sort
+ * @size: size of the array
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
 
 	quick_sort_recursive(array, 0, size - 1, size);
 }
-
